@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickCellphone & More - Expert Repairs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #1e3c72;
+      --accent: #f4f9ff;
+      --hover: #142850;
+      --highlight: #ffd700;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #e2ecfa, #fdfbff);
+      color: #111;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(to right, var(--primary), var(--hover));
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      border-bottom: 4px solid var(--highlight);
+      animation: fadeIn 1s ease-in-out;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+    header p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 3rem 2rem;
+    }
+    .intro, .location-section, .contact-info {
+      text-align: center;
+      background: linear-gradient(to bottom right, #ffffff, #f4f9ff);
+      margin-bottom: 3rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+    .intro:hover, .location-section:hover, .contact-info:hover {
+      transform: scale(1.01);
+    }
+    .intro h2, .location-section h2, .contact-info h2 {
+      font-size: 2.5rem;
+      color: #1e3c72;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .intro h2::after, .location-section h2::after, .contact-info h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: var(--highlight);
+      margin: 0.5rem auto 1rem;
+      border-radius: 2px;
+    }
+    .intro p, .location-section p, .contact-info p {
+      font-size: 1.2rem;
+      color: #444;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .map-buttons a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 1rem 2rem;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+    .map-buttons a:hover {
+      background-color: var(--hover);
+      transform: scale(1.05);
+    }
+    footer {
+      background: linear-gradient(to right, var(--primary), var(--hover));
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      font-size: 1rem;
+      border-top: 4px solid var(--highlight);
+    }
+    .device-box {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border-radius: 12px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      text-align: center;
+      padding: 2rem;
+      color: white;
+      margin: 0.25rem;
+    }
+    .device-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .device-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    ul.price-list {
+      list-style: none;
+      padding-left: 0;
+      max-width: 500px;
+      margin: 1rem auto;
+      color: #333;
+      font-size: 1.1rem;
+      text-align: left;
+    }
+    ul.price-list li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>QuickCellphone & More</h1>
+    <p><strong style="font-size: 1.5rem; display: block; color: #FFD700;">WALK-INS WELCOME ANYTIME — NO APPOINTMENT NEEDED</strong>
+    Fast, Friendly & Professional Repairs for All Devices!</p>
+  </header>
+
+  <section class="intro">
+  <p style="font-size: 1rem; color: #777; max-width: 800px; margin: 0 auto 1.5rem auto;">
+    Welcome to QuickCellphone & More — the home of professional device repairs in Bradenton, FL. We believe your devices should work like new, and our goal is to make sure you walk out with a smile. Whether you’re a student, worker, parent, or traveler — we’re here to keep you connected.
+  </p>
+  <h2>We Fix Everything</h2>
+  <p>Whether it's a phone, Samsung, tablet, iPad, laptop, gaming console, or anything else — if it's broken, we fix it. No matter the issue — cracked screen, battery not charging, software issues, data recovery, motherboard failure, or liquid damage — we’ve got you covered. At QuickCellphone & More, we pride ourselves on solving even the toughest problems with fast turnaround and expert service.</p>
+
+  <div class="device-grid">
+    <div class="device-box" style="background: #2a5298;" data-device="iphone">iPhones</div>
+    <div class="device-box" style="background: #1c4376;" data-device="samsung">Samsung</div>
+    <div class="device-box" style="background: #2a5298;" data-device="ipad">iPads</div>
+    <div class="device-box" style="background: #1c4376;" data-device="tablet">Tablets</div>
+    <div class="device-box" style="background: #2a5298;" data-device="laptop">Laptops</div>
+    <div class="device-box" style="background: #1c4376;" data-device="playstation">PlayStation</div>
+    <div class="device-box" style="background: #1c4376;" data-device="xbox">Xbox</div>
+    <div class="device-box" style="background: #2a5298;" data-device="macbook">MacBooks</div>
+    <div class="device-box" style="background: #1c4376;" data-device="chromebook">Chromebooks</div>
+    <div class="device-box" style="background: #2a5298;" data-device="smartwatch">Smartwatches</div>
+    <div class="device-box" style="background: #1c4376;" data-device="accessory">Accessories</div>
+    <div class="device-box" style="background: #2a5298;" data-device="micro-soldering">Micro Soldering</div>
+  </div>
+</section>
+
+<section class="location-section">
+  <h2>Why Choose Us?</h2>
+  <p>We combine expert diagnostics with top-quality parts and friendly service. Our mission is to offer fast, affordable repairs that stand the test of time. Every customer is treated like family — no appointment needed, just walk in.</p>
+  <p>We’ve helped thousands of people in Bradenton and beyond restore their phones, tablets, laptops, and more. Stop stressing — we’ve got you covered.</p>
+</section>
+
+<section class="location-section">
+  <h2>Customer Reviews</h2>
+  <p style="font-style: italic; max-width: 800px; margin: 1rem auto; color: #333;">“Absolutely amazing service! Walked in with a cracked iPhone screen and walked out 20 minutes later like it never happened.” – Sarah J.</p>
+  <p style="font-style: italic; max-width: 800px; margin: 1rem auto; color: #333;">“These guys fixed my gaming console and even cleaned it out. Very professional and honest.” – Mike R.</p>
+  <p style="font-style: italic; max-width: 800px; margin: 1rem auto; color: #333;">“The staff was incredibly helpful and kind. I got my tablet back the same day, fully functional. Highly recommended!” – Vanessa K.</p>
+</section>
+
+<section class="location-section">
+  <h2>What Makes Us Different?</h2>
+  <p style="max-width: 900px; margin: 0 auto; color: #444; font-size: 1.1rem;">At QuickCellphone & More, it’s not just about repairs — it’s about restoring peace of mind. We take pride in delivering honest assessments, fair prices, and top-quality parts. Whether you're dealing with a minor glitch or a major breakdown, you can trust our techs to fix it right the first time.</p>
+  <p style="max-width: 900px; margin: 1rem auto; color: #444; font-size: 1.1rem;">From small fixes like charging ports to complex logic board repairs and micro soldering, we’re equipped to handle it all — with the fastest turnaround in town.</p>
+</section>
+
+<section class="location-section">
+  <h2>Same-Day Repairs Available</h2>
+  <p style="max-width: 900px; margin: 0 auto; color: #444; font-size: 1.1rem;">In a rush? We offer same-day repair services for most common issues like cracked screens, battery replacements, and charging problems. Walk in and walk out the same day with your device working like new.</p>
+</section>
+
+<section class="location-section">
+  <h2>Our Promise</h2>
+  <p style="max-width: 900px; margin: 0 auto; color: #444; font-size: 1.1rem;">We guarantee our work and parts with confidence. You’ll receive a full explanation of what was done and tips on keeping your device in top shape. Plus, we’re always available for follow-up support and questions.</p>
+</section>
+
+<section class="location-section">
+  <h2>Need Help Right Now?</h2>
+  <p style="max-width: 900px; margin: 0 auto 1.5rem auto; color: #444; font-size: 1.1rem;">Click below to instantly navigate to our shop — no calls, no emails, just directions straight to our door.</p>
+  <div class="map-buttons">
+    <a href="https://maps.apple.com/?address=817%20Manatee%20Ave%20W,%20Bradenton,%20FL%2034205" target="_blank">Open in Apple Maps</a>
+    <a href="https://www.google.com/maps?q=817+Manatee+Ave+W,+Bradenton,+FL+34205" target="_blank">Open in Google Maps</a>
+  </div>
+</section>
+
+<!-- Modal container -->
+<div id="priceModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h2 id="modalTitle">Title</h2>
+    <ul class="price-list" id="modalPriceList">
+      <!-- Prices get inserted here -->
+    </ul>
+  </div>
+</div>
+
+<section class="contact-info">
+  <h2>Contact & Location</h2>
+  <p><strong>Phone:</strong> <span style="color: black; font-weight: bold;">(727) 510-0435</span></p>
+  <p><strong>Email:</strong> <span style="color: black; font-weight: bold;">quickcellphonemore@gmail.com</span></p>
+  <p><strong>Address:</strong> <strong>817 Manatee Ave W, Bradenton, FL 34205</strong></p>
+  <p>We’re located inside a plaza with easy parking. Just walk in — we’re ready for you!</p>
+  <div class="map-buttons">
+    <a href="https://maps.apple.com/?address=817%20Manatee%20Ave%20W,%20Bradenton,%20FL%2034205" target="_blank">Open in Apple Maps</a>
+    <a href="https://www.google.com/maps?q=817+Manatee+Ave+W,+Bradenton,+FL+34205" target="_blank">Open in Google Maps</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 QuickCellphone & More. All rights reserved.</p>
+</footer>
+
+<script>
+  const prices = {
+    iphone: [
+      'Screen Replacement: $99',
+      'Battery Replacement: $59',
+      'Water Damage Repair: $120'
+    ],
+    samsung: [
+      'Screen Replacement: $89',
+      'Battery Replacement: $55',
+      'Software Fix: $60'
+    ],
+    ipad: [
+      'Screen Replacement: $110',
+      'Battery Replacement: $65',
+      'Charging Port Repair: $70'
+    ],
+    tablet: [
+      'Screen Replacement: $100',
+      'Battery Replacement: $60',
+      'Software Troubleshooting: $65'
+    ],
+    laptop: [
+      'Screen Replacement: $130',
+      'Battery Replacement: $75',
+      'Keyboard Repair: $80'
+    ],
+    playstation: [
+      'Disk Drive Repair: $90',
+      'Controller Fix: $45',
+      'Software Update: $50'
+    ],
+    xbox: [
+      'Disk Drive Repair: $85',
+      'Controller Fix: $40',
+      'Software Update: $50'
+    ],
+    macbook: [
+      'Screen Replacement: $150',
+      'Battery Replacement: $80',
+      'Logic Board Repair: $200'
+    ],
+    chromebook: [
+      'Screen Replacement: $110',
+      'Battery Replacement: $60',
+      'Charging Port Repair: $70'
+    ],
+    smartwatch: [
+      'Screen Replacement: $90',
+      'Battery Replacement: $50',
+      'Software Fix: $60'
+    ],
+    accessory: [
+      'Screen Protectors: $20',
+      'Chargers: $25',
+      'Cables: $15'
+    ],
+    'micro-soldering': [
+      'Logic Board Repair: $250',
+      'Connector Replacement: $100',
+      'Component Replacement: $150'
+    ]
+  };
+
+  const modal = document.getElementById('priceModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalPriceList = document.getElementById('modalPriceList');
+  const closeModalBtn = document.getElementById('closeModal');
+  const deviceBoxes = document.querySelectorAll('.device-box');
+
+  deviceBoxes.forEach(box => {
+    box.addEventListener('click', () => {
+      const device = box.getAttribute('data-device');
+      modalTitle.textContent = box.textContent + ' Repair Prices';
+      modalPriceList.innerHTML = '';
+      prices[device].forEach(price => {
+        const li = document.createElement('li');
+        li.textContent = price;
+        modalPriceList.appendChild(li);
+      });
+      modal.style.display = 'flex';
+    });
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>
